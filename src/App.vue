@@ -1,16 +1,18 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link :to="{ name: 'Home', params: {} }">Home</router-link>
-      <router-link :to="{ name: 'Login', params: {} }">Login</router-link>
+    <div is="sui-container">
+      <Navigation />
+      <router-view/>
     </div>
-    <router-view/>
+
   </div>
 </template>
 
 <script>
+import Navigation from '@/components/Navigation.vue'
 export default {
-  name: 'App'
+  name: 'App',
+  components: { Navigation }
 }
 </script>
 

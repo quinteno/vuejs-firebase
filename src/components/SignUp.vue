@@ -1,47 +1,55 @@
 <template>
   <div class="sign-up">
-    <p>
-      Create a new account
-    </p>
-    <input type="text" placeholder="Email" /><br />
-    <input type="password" placeholder="Password" />
-    <button>Sign Up</button>
-    <span>or go back to login.</span>
+    <h2>Create a new account</h2>
+    <sui-form>
+      <sui-form-field>
+        <sui-input type="text" v-model="email" placeholder="Email" icon="user circle" icon-position="left"/><br />
+      </sui-form-field>
+      <sui-form-field>
+        <sui-input type="password" v-model="password" placeholder="Password" icon="lock" icon-position="left"/><br />
+      </sui-form-field>
+      <sui-button @click="signUp">Sign Up</sui-button>
+      <p>or go back to <router-link :to="{ name: 'Login', params: {} }">login</router-link></p>
+
+    </sui-form>
   </div>
 </template>
 
 <script>
+import firebase from 'firebase'
+// eslint-disable-next-line
+import Fire from '../Fire.js'
+
 export default {
-  name: 'signUp',
+  name: 'SignUp',
   data () {
-    return {}
+    return {
+      email: '',
+      password: ''
+    }
   },
-  methods: {}
+  methods: {
+    signUp: function () {
+      firebase
+        .auth().createUserWithEmailAndPassword(this.email, this.password)
+        .then(user => {
+          this.$router.replace('home')
+        })
+        .catch(err => {
+          console.log('error: ' + err.message)
+        })
+    }
+  }
 }
 </script>
 
 <style lang="scss" scoped>
-  .signUp {
-    margin-top: 40px;
+  .sign-up {
+    max-width: 480px;
+    margin: 0 auto;
 
-    input {
-      margin: 10px 0;
-      width: 20%;
-      padding: 15px;
-    }
-
-    button {
-      margin-top: 10px;
-      width: 10%;
-      cursor: pointer;
-    }
-
-    p {
-      span {
-        display: block;
-        margin-top: 20px;
-        font-size: 11px;
-      }
+    h2 {
+      margin-top: 20vh;
     }
   }
 </style>

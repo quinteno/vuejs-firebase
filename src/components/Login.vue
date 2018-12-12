@@ -1,47 +1,57 @@
-<template>
+<template lang="html">
   <div class="login">
-    <h3>Sign In</h3>
-    <input type="text" placeholder="Email" /><br />
-    <input type="password" placeholder="Password" /><br />
-    <button>Connection</button>
-    <p>
-      Don't have an account? You can <router-link :to="{ name: 'SignUp', params: {} }">create one</router-link>
-    </p>
+    <h2>Sign In</h2>
+    <sui-form>
+      <sui-form-field>
+        <sui-input type="text" v-model="email" placeholder="Email" icon="user circle" icon-position="left"/><br />
+      </sui-form-field>
+      <sui-form-field>
+        <sui-input type="password" v-model="password" placeholder="Password" icon="lock" icon-position="left"/><br />
+      </sui-form-field>
+      <sui-button @click="login">Login</sui-button>
+      <p>
+        Don't have an account? You can <router-link :to="{ name: 'SignUp', params: {} }">create one</router-link>
+      </p>
+    </sui-form>
+
   </div>
 </template>
 
 <script>
+import firebase from 'firebase'
+// eslint-disable-next-line
+import Fire from '../Fire.js'
+
 export default {
   name: 'login',
   data () {
-    return {}
+    return {
+      email: '',
+      password: ''
+    }
   },
-  methods: {}
+  methods: {
+    login: function () {
+      firebase
+        .auth().signInWithEmailAndPassword(this.email, this.password)
+        .then(user => {
+          this.$router.replace('home')
+        })
+        .catch(err => {
+          console.log('Oops: ' + err.message)
+        })
+    }
+  }
 }
 </script>
 
 <style lang="scss" scoped> /* "scoped" limits the CSS to this component only */
   .login {
-    margin-top: 40px;
+    max-width: 480px;
+    margin: 0 auto;
 
-    input {
-      margin: 10px 0;
-    }
-
-    button {
-      margin-top: 20px;
-      width: 10%;
-      cursor: pointer;
-    }
-
-    p {
-      margin-top: 40px;
-      font-size: 13px;
-
-      a {
-        text-decoration: underline;
-        cursor: pointer;
-      }
+    h2 {
+      margin-top: 20vh;
     }
   }
 </style>
