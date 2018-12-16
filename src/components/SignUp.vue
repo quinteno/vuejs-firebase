@@ -1,12 +1,20 @@
 <template>
   <div class="sign-up">
-    <h2>Create a new account</h2>
-    <sui-form>
-      <sui-form-field>
-        <sui-input type="text" v-model="email" placeholder="Email" icon="user circle" icon-position="left"/><br />
+    <div class="header-container">
+      <h2>Sign Up for a New Account</h2>
+      <p>
+        The best way to discover and share content with your friends.
+      </p>
+    </div><br /><br />
+    <el-form>
+      <el-form-item>
+        <sui-input type="text" v-model="email" placeholder="Email" /><br />
       </sui-form-field>
       <sui-form-field>
-        <sui-input type="password" v-model="password" placeholder="Password" icon="lock" icon-position="left"/><br />
+        <sui-input type="password" v-model="password" placeholder="Password" /><br />
+      </sui-form-field>
+      <sui-form-field>
+        <sui-input type="text" v-model="username" placeholder="Username" id="username"/><br />
       </sui-form-field>
       <sui-button @click="signUp">Sign Up</sui-button>
       <p>or go back to <router-link :to="{ name: 'Login', params: {} }">login</router-link></p>
@@ -16,8 +24,8 @@
 </template>
 
 <script>
+/* eslint-disable */
 import firebase from 'firebase'
-// eslint-disable-next-line
 import Fire from '../Fire.js'
 
 export default {
@@ -25,22 +33,26 @@ export default {
   data () {
     return {
       email: '',
-      password: ''
+      password: '',
+      username: ''
     }
   },
   methods: {
     signUp: function () {
+      // Create a new user account
       firebase
         .auth().createUserWithEmailAndPassword(this.email, this.password)
-        .then(user => {
+        .then(() => {
+          console.log('User created. Redirecting..')
           this.$router.replace('home')
         })
         .catch(err => {
-          console.log('error: ' + err.message)
+          console.log('🤕 ' + err.message)
         })
     }
   }
 }
+
 </script>
 
 <style lang="scss" scoped>
