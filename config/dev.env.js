@@ -9,6 +9,6 @@ module.exports = merge(prodEnv, {
   FIREBASE_AUTH_DOMAIN: '"drape-vuejs.firebaseapp.com"',
   FIREBASE_DATABASE_URL: '"https://drape-vuejs.firebaseio.com"',
   FIREBASE_PROJECT_ID: '"drape-vuejs"',
-  FIREBASE_STORAGE_BUCKET: '"drape-vuejs.appspot.com"',
+  FIREBASE_STORAGE_BUCKET: '"gs://drape-vuejs.appspot.com"',
   FIREBASE_MESSAGING_SENDER_ID: '"1058111268871"'
 })

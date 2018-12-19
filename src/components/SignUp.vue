@@ -6,20 +6,30 @@
         The best way to discover and share content with your friends.
       </p>
     </div><br /><br />
+    <el-alert
+    :title="error"
+    class="errorMsg"
+    type="error"
+    center
+    show-icon v-if="error">
+    </el-alert>
     <el-form>
-      <el-form-item>
-        <sui-input type="text" v-model="email" placeholder="Email" /><br />
-      </sui-form-field>
-      <sui-form-field>
-        <sui-input type="password" v-model="password" placeholder="Password" /><br />
-      </sui-form-field>
-      <sui-form-field>
-        <sui-input type="text" v-model="username" placeholder="Username" id="username"/><br />
-      </sui-form-field>
-      <sui-button @click="signUp">Sign Up</sui-button>
+      <el-form-item required>
+        <el-input type="text" v-model="email" placeholder="Email" /><br />
+      </el-form-item>
+      <el-form-item required>
+        <el-input type="password" v-model="password" placeholder="Password" /><br />
+      </el-form-item>
+      <!-- <el-form-item required prop="confirmPassword">
+        <el-input type="password" v-model="confirmPassword" placeholder="Confirm Password" :rules="comparePasswords" /><br />
+      </el-form-item> -->
+      <el-form-item required>
+        <el-input type="text" v-model="username" placeholder="Username" id="username"/><br />
+      </el-form-item>
+      <el-button @click="signUp">Sign Up</el-button>
       <p>or go back to <router-link :to="{ name: 'Login', params: {} }">login</router-link></p>
 
-    </sui-form>
+    </el-form>
   </div>
 </template>
 
@@ -34,21 +44,41 @@ export default {
     return {
       email: '',
       password: '',
-      username: ''
+      username: '',
+      error: ''
     }
   },
+  // computed: {
+  //   comparePasswords () {
+  //     return this.password !== this.confirmPassword ? 'Passwords do not match' : ''
+  //   }
+  // }, TODO: add confirm password
   methods: {
     signUp: function () {
+
       // Create a new user account
       firebase
         .auth().createUserWithEmailAndPassword(this.email, this.password)
-        .then(() => {
-          console.log('User created. Redirecting..')
-          this.$router.replace('home')
-        })
-        .catch(err => {
-          console.log('🤕 ' + err.message)
-        })
+          // .then(function (user) {
+          //   var user = firebase.auth().currentUser
+          //
+          //   user.updateProfile({
+          //     displayName: document.querySelector('#username').value
+          //   })
+          //   .then(() => {
+          //     console.log('Update Success')
+          //
+          //   })
+          //   // console.log('User created. Redirecting..')
+          .then(() => {
+            this.$router.replace('home') // TODO: update username on signUp
+          })
+
+          // })
+          // .catch(err => {
+          //   console.log('🤕 ' + err.message)
+          //   this.error = '🤕 ' + err.message
+          // })
     }
   }
 }
@@ -62,6 +92,10 @@ export default {
 
     h2 {
       margin-top: 20vh;
+    }
+
+    .errorMsg {
+      margin-bottom: 20px;
     }
   }
 </style>

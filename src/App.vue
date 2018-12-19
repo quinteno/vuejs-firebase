@@ -1,11 +1,11 @@
 <template>
   <div id="app">
-    <div class="container">
-      <nav class="nav-bar" mode="horizontal">
+    <nav class="nav-bar" mode="horizontal">
+      <div class="nav-bar-inner">
         <div class="nav-left">
-          <span v-if="user">Hello, {{ user.displayName }} !</span>
+          <!-- <span v-if="user">Hello, {{ user.displayName }} !</span> -->
           <router-link :to="{ name: 'Home', params: {} }">Home</router-link>
-          <router-link v-if="user" :to="{ name: '', params: {} }">Profile</router-link>
+          <router-link v-if="user" :to="{ name: 'Account', params: {} }">Account</router-link>
         </div>
           <!--<sui-menu-item>
 
@@ -17,7 +17,10 @@
             <router-link :to="{ name: 'SignUp', params: {} }">Sign Up</router-link>
           </div>
         </div>
-      </nav>
+      </div>
+    </nav>
+    <div class="container">
+
       <router-view/>
     </div>
 
@@ -57,46 +60,73 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
+
 #app {
   font-family: 'Montserrat', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
+  
   color: #2c3e50;
-  margin-top: 60px;
+  background: rgb(249, 249, 249);
+
 
   input {
     font-family: 'Montserrat', sans-serif !important;
   }
 
+
   .nav-bar {
-    border: none;
-    box-shadow: none;
-    display: grid;
-    grid-template-columns: 1fr max-content;
+    width: 100%;
+    margin: 0 auto;
+    height: 4rem;
+    position: relative;
+    top: 0px;
+    display:grid;
+    align-items: center;
 
-    a {
-      text-decoration: none;
-      color: black;
-    }
+    background: white;
 
-    .nav-left {
+
+    .nav-bar-inner {
+      width: 90%;
+      margin: 0 auto;
       display: grid;
-      grid-gap: 30px;
-      grid-template-columns: repeat(5,max-content);
-    }
+      grid-template-columns: 1fr max-content;
+      align-items: center;
+      overflow: visible;
+      a {
+        text-decoration: none;
+        color: black;
+        transition: .2s ease-in-out;
 
-    .nav-right {
-      display: grid;
-      grid-template-columns: repeat(2, max-content);
-      grid-gap: 20px;
+        &:hover {
+          opacity: .5;
+          transition: .2s ease-in-out;
+        }
+      }
 
-      div {
+      .nav-left {
+        display: grid;
+        grid-gap: 30px;
+        grid-template-columns: repeat(5,max-content);
+      }
+
+      .nav-right {
         display: grid;
         grid-template-columns: repeat(2, max-content);
-        grid-gap: 30px;
+        grid-gap: 20px;
+
+        div {
+          display: grid;
+          grid-template-columns: repeat(2, max-content);
+          grid-gap: 30px;
+        }
       }
     }
+
+
   }
 
   .container {
