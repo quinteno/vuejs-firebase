@@ -16,6 +16,7 @@
     "firebase": "^5.7.0",
     "material-icons": "^0.2.3",
     "moment": "^2.23.0",
+    "push-dir": "^0.4.1",
     "semantic-ui-css": "^2.4.1",
     "semantic-ui-vue": "^0.7.0",
     "vue": "^2.5.2",
