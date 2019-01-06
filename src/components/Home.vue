@@ -154,6 +154,18 @@ export default {
     width: 100%;
     margin-top: 20px;
     margin-bottom: 20px;
+    background-color: #2294d2;
+    border: none;
+    color: white;
+    transition: .2s ease-in-out;
+    -webkit-box-shadow: 0 2px 12px 0 rgba(0,0,0,.1);
+    box-shadow: 0 2px 12px 0 rgba(0,0,0,.1);
+
+    &:hover {
+      -webkit-box-shadow: 0 5px 12px 0 rgba(0,0,0,.1);
+      box-shadow: 0 5px 12px 0 rgba(0,0,0,.1);
+      background-color: #1f81b7;
+    }
   }
 
   #postForm {
@@ -173,6 +185,7 @@ export default {
 
         @media screen and (max-width: 480px) {
           width: 100%;
+          display: block;
         }
       }
     }
@@ -190,6 +203,15 @@ export default {
       text-align: left;
       font-size: 1rem;
       margin-bottom: .75em;
+      border: 0;
+      transition: .3s ease-in-out;
+      -webkit-box-shadow: 0 2px 12px 0 rgba(0,0,0,.1);
+      box-shadow: 0 2px 12px 0 rgba(0,0,0,.1);
+
+      &:hover {
+        -webkit-box-shadow: 0 5px 12px 0 rgba(0,0,0,.1);
+        box-shadow: 0 5px 12px 0 rgba(0,0,0,.1);
+      }
 
       .post-image {
         width: 100%;
@@ -224,12 +246,16 @@ export default {
         margin: 0 auto;
         display: block;
         font-weight: bold;
+        font-size: 1.25rem;
         margin-top: -10px;
         margin-bottom: -10px !important;
+        border-bottom: 1px solid #e6e6e6;
+        padding-bottom: 15px;
       }
 
       .card-bottom {
         position: relative;
+        text-align: center;
 
         .post-time {
           opacity: .5;
