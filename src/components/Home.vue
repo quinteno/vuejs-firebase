@@ -39,7 +39,7 @@
         <img :src="post.imgURL" class="post-image"/>
         <div style="padding: 14px">
           <div class="user-profile">
-            <img class="post-profile-img" :src= " user.photoURL || '../static/default.jpg'" />
+            <img class="post-profile-img" :src= " user.photoURL || './static/default.jpg'" />
             <p class="post-user"><span class="author-by">by </span>{{ post.user }}</p><br />
           </div>
           <p class="post-title">{{ post.title }}</p><br />
